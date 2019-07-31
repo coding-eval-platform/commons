@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ar.edu.itba.cep</groupId>
+    <artifactId>commons</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>
+        Project containing several commons libraries to be reused across the platform.
+    </description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <revision>0.0.1-SNAPSHOT</revision>
+        <com.bellotapps.webapps.webapps-commons.version>0.3.0-RELEASE</com.bellotapps.webapps.webapps-commons.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Import this libraries BOM -->
+            <!-- TODO: check if this is necessary -->
+            <dependency>
+                <groupId>com.bellotapps.webapps</groupId>
+                <artifactId>webapps-commons-bom</artifactId>
+                <version>${com.bellotapps.webapps.webapps-commons.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Import this libraries dependencies -->
+            <dependency>
+                <groupId>com.bellotapps.webapps</groupId>
+                <artifactId>webapps-commons-dependencies</artifactId>
+                <version>${com.bellotapps.webapps.webapps-commons.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>local-deploy</id>
+            <build>
+                <plugins>
+                    <!-- Package sources -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+                    <!-- Package docs -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>bintray-deploy</id>
+            <build>
+                <plugins>
+                    <!-- Package sources -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                    </plugin>
+                    <!-- Package docs -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                    </plugin>
+
+                    <!-- Flatten plugin configuration -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>flatten</id>
+                                <configuration>
+                                    <pomElements>
+                                        <description>keep</description>
+                                        <url>keep</url>
+                                        <scm>keep</scm>
+                                        <developers>keep</developers>
+                                    </pomElements>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <distributionManagement>
+                <repository>
+                    <id>bintray-coding-eval-platform-maven</id>
+                    <name>coding-eval-platform-maven</name>
+                    <url>https://api.bintray.com/maven/coding-eval-platform/maven/commons/;publish=1</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+
+        <profile>
+            <id>travis-ci</id>
+            <build>
+                <plugins>
+                    <!-- For the Travis CI profile, resolve using the CI Friendly flatten mode -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>flatten</id>
+                                <configuration>
+                                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <!-- Always flatten with default configuration (set in default dependencyManagement) -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <!-- Maven compiler plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.0</version>
+                    <configuration>
+                        <source>11</source>
+                        <target>11</target>
+                    </configuration>
+                </plugin>
+                <!-- Maven versions plugin -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+                <!-- Sources -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.0.1</version>
+                    <executions>
+                        <execution>
+                            <id>attach-sources</id>
+                            <goals>
+                                <goal>jar-no-fork</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- Javadocs -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.0.1</version>
+                    <configuration>
+                        <detectOfflineLinks>false</detectOfflineLinks>
+                        <quiet>true</quiet>
+                        <tags>
+                            <tag>
+                                <name>implNote</name>
+                                <placement>tcmf</placement>
+                                <head>Implementation Note:</head>
+                            </tag>
+                            <tag>
+                                <name>implSpec</name>
+                                <placement>tcmf</placement>
+                                <head>Implementation Requirements:</head>
+                            </tag>
+                            <tag>
+                                <name>apiNote</name>
+                                <placement>tcmf</placement>
+                                <head>API Note:</head>
+                            </tag>
+                        </tags>
+                        <additionalOptions>-html5</additionalOptions>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- Flatten plugin -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>1.1.0</version>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}</outputDirectory>
+                    </configuration>
+                    <executions>
+                        <!-- Default execution configuration for the flatten goal (this must happen always) -->
+                        <execution>
+                            <id>flatten</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+                            <configuration>
+                                <updatePomFile>true</updatePomFile>
+                                <pomElements>
+                                    <parent>expand</parent>
+                                    <name>keep</name>
+                                    <properties>keep</properties>
+                                    <modules>keep</modules>
+                                </pomElements>
+                            </configuration>
+                        </execution>
+                        <!-- Default execution configuration for the clean goal -->
+                        <execution>
+                            <id>flatten-clean</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Juan Marcos Bellini</name>
+            <email>jbellini@itba.edu.ar</email>
+            <organization>ITBA</organization>
+            <organizationUrl>https://itba.edu.ar</organizationUrl>
+        </developer>
+        <developer>
+            <name>Daniel Lobo</name>
+            <email>dlobo@itba.edu.ar</email>
+            <organization>ITBA</organization>
+            <organizationUrl>https://itba.edu.ar</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/coding-eval-platform/commons.git</connection>
+        <developerConnection>scm:git:ssh://github.com:coding-eval-platform/commons.git</developerConnection>
+        <url>http://github.com/coding-eval-platform/commons/tree/master</url>
+    </scm>
+
+</project>
