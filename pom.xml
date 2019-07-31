@@ -19,6 +19,12 @@
         <com.bellotapps.webapps.webapps-commons.version>0.3.0-RELEASE</com.bellotapps.webapps.webapps-commons.version>
     </properties>
 
+    <modules>
+        <module>commons-keys</module>
+        <module>commons-web-authentication</module>
+        <module>commons-web-authentication-jwt</module>
+    </modules>
+
     <dependencyManagement>
         <dependencies>
             <!-- Import this libraries BOM -->
