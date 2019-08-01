@@ -7,7 +7,7 @@
 
     <parent>
         <groupId>ar.edu.itba.cep</groupId>
-        <artifactId>commons</artifactId>
+        <artifactId>commons-libraries</artifactId>
         <version>${revision}</version>
     </parent>
 

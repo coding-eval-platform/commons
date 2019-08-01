@@ -20,9 +20,8 @@
     </properties>
 
     <modules>
-        <module>commons-keys</module>
-        <module>commons-web-authentication</module>
-        <module>commons-web-authentication-jwt</module>
+        <module>commons-bom</module>
+        <module>commons-libraries</module>
     </modules>
 
     <dependencyManagement>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ar.edu.itba.cep</groupId>
+        <artifactId>commons</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>commons-libraries</artifactId>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <packaging>pom</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <com.bellotapps.webapps.webapps-commons.version>0.3.0-RELEASE</com.bellotapps.webapps.webapps-commons.version>
+    </properties>
+
+    <modules>
+        <module>commons-keys</module>
+        <module>commons-web-authentication</module>
+        <module>commons-web-authentication-jwt</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Import this libraries BOM -->
+            <!-- TODO: check if this is necessary -->
+            <dependency>
+                <groupId>com.bellotapps.webapps</groupId>
+                <artifactId>webapps-commons-bom</artifactId>
+                <version>${com.bellotapps.webapps.webapps-commons.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Import this libraries dependencies -->
+            <dependency>
+                <groupId>com.bellotapps.webapps</groupId>
+                <artifactId>webapps-commons-dependencies</artifactId>
+                <version>${com.bellotapps.webapps.webapps-commons.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Configure flatten plugin to keep the dependencyManagement of this project -->
+    <!-- Note: The dependencies managed by this project are used by the libraries code -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <configuration>
+                            <pomElements>
+                                <dependencyManagement>keep</dependencyManagement>
+                            </pomElements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
