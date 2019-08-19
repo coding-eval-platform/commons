@@ -50,7 +50,7 @@ Add the necessary dependency in your project's `pom.xml` file. For example:
 	</dependency>
 </dependencies>
 ```
-
+
 #### Build from source
 
 You can also build your own versions of the libraries. Maven is required for this.
