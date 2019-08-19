@@ -21,6 +21,7 @@
 
     <modules>
         <module>commons-keys</module>
+        <module>commons-roles</module>
         <module>commons-web-authentication</module>
         <module>commons-web-authentication-jwt</module>
     </modules>

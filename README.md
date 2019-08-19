@@ -1,4 +1,4 @@
-# Commons [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Build Status](https://travis-ci.org/coding-eval-platform/commons.svg?branch=master)](https://travis-ci.org/coding-eval-platform/commons) 
+# Commons [![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Build Status](https://travis-ci.org/coding-eval-platform/commons.svg?branch=master)](https://travis-ci.org/coding-eval-platform/commons) [![download](https://api.bintray.com/packages/coding-eval-platform/maven/commons/images/download.svg)](https://bintray.com/coding-eval-platform/maven/commons/_latestVersion)
 
 Project containing several commons libraries to be reused across the platform.
 
@@ -50,7 +50,7 @@ Add the necessary dependency in your project's `pom.xml` file. For example:
 	</dependency>
 </dependencies>
 ```
-
+
 #### Build from source
 
 You can also build your own versions of the libraries. Maven is required for this.
