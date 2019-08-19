@@ -27,6 +27,11 @@
             </dependency>
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>
+                <artifactId>commons-roles</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
                 <artifactId>commons-web-authentication</artifactId>
                 <version>${revision}</version>
             </dependency>
