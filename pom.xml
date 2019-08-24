@@ -15,7 +15,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <revision>0.0.2-RELEASE</revision>
+        <revision>0.0.3-RELEASE</revision>
         <com.bellotapps.webapps.webapps-commons.version>0.3.0-RELEASE</com.bellotapps.webapps.webapps-commons.version>
     </properties>
 

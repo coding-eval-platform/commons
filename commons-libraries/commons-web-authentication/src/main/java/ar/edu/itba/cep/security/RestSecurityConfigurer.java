@@ -5,7 +5,6 @@ import ar.edu.itba.cep.security.anonymous.AnonymousAccessFilter;
 import ar.edu.itba.cep.security.anonymous.EnableAnonymousAccess;
 import ar.edu.itba.cep.security.bearer.BearerTokenAuthenticationFilter;
 import ar.edu.itba.cep.security.bearer.EnableBearerTokenAuthentication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -101,7 +100,6 @@ class RestSecurityConfigurer extends WebSecurityConfigurerAdapter {
      * @return The {@link FilterRegistrationBean}.
      */
     @Bean
-    @ConditionalOnMissingBean
     public FilterRegistrationBean<BearerTokenAuthenticationFilter> bearerTokenAuthenticationFilter2Registration() {
         return disabledFilterRegistration(bearerTokenAuthenticationFilter);
     }
@@ -115,7 +113,6 @@ class RestSecurityConfigurer extends WebSecurityConfigurerAdapter {
      * @return The {@link FilterRegistrationBean}.
      */
     @Bean
-    @ConditionalOnMissingBean
     public FilterRegistrationBean<AnonymousAccessFilter> anonymousAccessFilterRegistration() {
         return disabledFilterRegistration(anonymousAccessFilter);
     }
