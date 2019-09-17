@@ -1,4 +1,4 @@
-package ar.edu.itba.cep.executor_service.models;
+package ar.edu.itba.cep.executor.models;
 
 import ar.edu.itba.cep.executor.models.Language;
 import com.github.javafaker.Faker;
