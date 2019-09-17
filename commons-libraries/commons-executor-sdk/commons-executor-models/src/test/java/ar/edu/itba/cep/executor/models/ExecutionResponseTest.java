@@ -73,24 +73,6 @@ class ExecutionResponseTest {
     }
 
     /**
-     * Tests that creating an {@link ExecutionResponse} with a {@code null} {@code stdout} {@link List}
-     * throws an {@link IllegalArgumentException}.
-     */
-    @Test
-    void testNullStdout() {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new ExecutionResponse(
-                        TestHelper.validResult(),
-                        TestHelper.validExitCode(),
-                        null,
-                        TestHelper.validInputOutputList()
-                ),
-                "Creating an execution response with a null stdout list is being allowed."
-        );
-    }
-
-
-    /**
      * Tests that creating an {@link ExecutionResponse} with a {@code null} element
      * in the {@code stdout} {@link List} throws an {@link IllegalArgumentException}.
      */
@@ -106,25 +88,6 @@ class ExecutionResponseTest {
                 "Creating an execution response with a null element in the stdout list is being allowed."
         );
     }
-
-
-    /**
-     * Tests that creating an {@link ExecutionResponse} with a {@code null} {@code stderr} {@link List}
-     * throws an {@link IllegalArgumentException}.
-     */
-    @Test
-    void testNullStderr() {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new ExecutionResponse(
-                        TestHelper.validResult(),
-                        TestHelper.validExitCode(),
-                        TestHelper.validInputOutputList(),
-                        null
-                ),
-                "Creating an execution response with a null stderr list is being allowed."
-        );
-    }
-
 
     /**
      * Tests that creating an {@link ExecutionResponse} with a {@code null} element

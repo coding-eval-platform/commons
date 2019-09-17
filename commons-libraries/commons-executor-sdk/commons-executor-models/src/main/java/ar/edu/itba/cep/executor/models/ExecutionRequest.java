@@ -1,20 +1,19 @@
 package ar.edu.itba.cep.executor.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.util.Assert;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents an execution request.
+ * In includes a no-args constructor with protected visibility
+ * to allow persistence of objects of this type (or subclasses) using JPA.
  */
 @Getter
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 public class ExecutionRequest {
 
     /**
@@ -30,7 +29,7 @@ public class ExecutionRequest {
      */
     private final List<String> stdin;
     /**
-     * The compiler flags. Must be null if the {@link #language} is compiled.
+     * The compiler flags. Should be null if the {@link #language} is compiled.
      */
     private final String compilerFlags;
     /**
@@ -68,8 +67,12 @@ public class ExecutionRequest {
         assertTimeout(timeout);
         assertLanguage(language);
         this.code = code;
-        this.programArguments = Collections.unmodifiableList(programArguments);
-        this.stdin = Collections.unmodifiableList(stdin);
+        this.programArguments = Optional.ofNullable(programArguments)
+                .map(Collections::unmodifiableList)
+                .orElseGet(LinkedList::new);
+        this.stdin = Optional.ofNullable(stdin)
+                .map(Collections::unmodifiableList)
+                .orElseGet(LinkedList::new);
         this.compilerFlags = compilerFlags;
         this.timeout = timeout;
         this.language = language;
@@ -97,10 +100,9 @@ public class ExecutionRequest {
      * @throws IllegalArgumentException If the {@code programArguments} {@link List} is not valid.
      */
     private static void assertProgramArguments(final List<String> programArguments) throws IllegalArgumentException {
-        Assert.notNull(programArguments, "The programArguments list must not be null");
         Assert.isTrue(
-                programArguments.stream().noneMatch(Objects::isNull),
-                "The program arguments list must not contain nulls."
+                Objects.isNull(programArguments) || programArguments.stream().noneMatch(Objects::isNull),
+                "If present, the program arguments list must not contain nulls."
         );
     }
 
@@ -111,10 +113,9 @@ public class ExecutionRequest {
      * @throws IllegalArgumentException If the {@code stdin} {@link List} is not valid.
      */
     private static void assertStdin(final List<String> stdin) throws IllegalArgumentException {
-        Assert.notNull(stdin, "The stdin list must not be null");
         Assert.isTrue(
-                stdin.stream().noneMatch(Objects::isNull),
-                "The stdin list must not contain nulls."
+                Objects.isNull(stdin) || stdin.stream().noneMatch(Objects::isNull),
+                "If present, the stdin list must not contain nulls."
         );
     }
 

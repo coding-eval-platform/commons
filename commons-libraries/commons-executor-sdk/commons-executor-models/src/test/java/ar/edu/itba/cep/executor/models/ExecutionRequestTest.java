@@ -89,25 +89,6 @@ class ExecutionRequestTest {
     }
 
     /**
-     * Tests that creating an {@link ExecutionRequest} with a {@code null} {@code programArguments} {@link List}
-     * throws an {@link IllegalArgumentException}.
-     */
-    @Test
-    void testNullProgramArguments() {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new ExecutionRequest(
-                        TestHelper.validCode(),
-                        null,
-                        TestHelper.validInputOutputList(),
-                        TestHelper.validCompilerFlags(),
-                        TestHelper.validTimeout(),
-                        TestHelper.validLanguage()
-                ),
-                "Creating an execution request with a null inputs list is being allowed."
-        );
-    }
-
-    /**
      * Tests that creating an {@link ExecutionRequest} with a {@code null} element
      * in the {@code programArguments} {@link List} throws an {@link IllegalArgumentException}.
      */
@@ -127,30 +108,11 @@ class ExecutionRequestTest {
     }
 
     /**
-     * Tests that creating an {@link ExecutionRequest} with a {@code null} {@code stdin} {@link List}
-     * throws an {@link IllegalArgumentException}.
-     */
-    @Test
-    void testNullInputs() {
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> new ExecutionRequest(
-                        TestHelper.validCode(),
-                        TestHelper.validInputOutputList(),
-                        null,
-                        TestHelper.validCompilerFlags(),
-                        TestHelper.validTimeout(),
-                        TestHelper.validLanguage()
-                ),
-                "Creating an execution request with a null inputs list is being allowed."
-        );
-    }
-
-    /**
      * Tests that creating an {@link ExecutionRequest} with a {@code null} element
      * in the {@code stdin} {@link List} throws an {@link IllegalArgumentException}.
      */
     @Test
-    void testNullElementInInputsList() {
+    void testNullElementInStdinList() {
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> new ExecutionRequest(
                         TestHelper.validCode(),

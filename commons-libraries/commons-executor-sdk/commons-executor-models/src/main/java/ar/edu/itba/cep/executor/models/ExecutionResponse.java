@@ -1,19 +1,19 @@
 package ar.edu.itba.cep.executor.models;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.util.Assert;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents an execution response.
+ * In includes a no-args constructor with protected visibility
+ * to allow persistence of objects of this type (or subclasses) using JPA.
  */
 @Getter
 @ToString(doNotUseGetters = true)
 @EqualsAndHashCode(doNotUseGetters = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 public class ExecutionResponse {
 
     /**
@@ -60,8 +60,8 @@ public class ExecutionResponse {
         assertStdErrList(stderr);
         this.result = result;
         this.exitCode = exitCode;
-        this.stdout = stdout;
-        this.stderr = stderr;
+        this.stdout = Optional.ofNullable(stdout).map(Collections::unmodifiableList).orElseGet(LinkedList::new);
+        this.stderr = Optional.ofNullable(stderr).map(Collections::unmodifiableList).orElseGet(LinkedList::new);
     }
 
 
@@ -97,8 +97,10 @@ public class ExecutionResponse {
      * @throws IllegalArgumentException If the {@link List} is not valid.
      */
     private static void assertStdOutList(final List<String> stdout) throws IllegalArgumentException {
-        Assert.notNull(stdout, "The stdout list must not be null");
-        Assert.isTrue(stdout.stream().noneMatch(Objects::isNull), "The stdout list must not contain nulls.");
+        Assert.isTrue(
+                Objects.isNull(stdout) || stdout.stream().noneMatch(Objects::isNull),
+                "If present, the stdout list must not contain nulls."
+        );
     }
 
     /**
@@ -108,8 +110,10 @@ public class ExecutionResponse {
      * @throws IllegalArgumentException If the {@link List} is not valid.
      */
     private static void assertStdErrList(final List<String> stderr) throws IllegalArgumentException {
-        Assert.notNull(stderr, "The stderr list must not be null");
-        Assert.isTrue(stderr.stream().noneMatch(Objects::isNull), "The stderr list must not contain nulls.");
+        Assert.isTrue(
+                Objects.isNull(stderr) || stderr.stream().noneMatch(Objects::isNull),
+                "If present, the stderr list must not contain nulls."
+        );
     }
 
 
