@@ -13,13 +13,9 @@ import java.util.Objects;
  */
 @Getter
 @ToString(doNotUseGetters = true)
-@EqualsAndHashCode(doNotUseGetters = true, of = "executionRequest")
+@EqualsAndHashCode(doNotUseGetters = true)
 public class ExecutionResponse {
 
-    /**
-     * The {@link ExecutionRequest} to which this execution response belongs to.
-     */
-    private final ExecutionRequest executionRequest;
     /**
      * The result of the execution (e.g finished, timed-out, or with compilation errors).
      */
@@ -43,30 +39,25 @@ public class ExecutionResponse {
     /**
      * Constructor.
      *
-     * @param executionRequest The {@link ExecutionRequest} to which this execution response belongs to.
-     * @param result           The result of the execution (e.g finished, timed-out, or with compilation errors).
-     * @param exitCode         The execution's exit code.
-     * @param stdout           A {@link List} of {@link String}s
-     *                         that were sent to standard output by the program being executed.
-     *                         Each {@link String} in the {@link List} is a line that was printed in standard output.
-     * @param stderr           A {@link List} of {@link String}s
-     *                         that were sent to standard error output by the program being executed.
-     *                         Each {@link String} in the {@link List} is a line
-     *                         that was printed in standard error output.
+     * @param result   The result of the execution (e.g finished, timed-out, or with compilation errors).
+     * @param exitCode The execution's exit code.
+     * @param stdout   A {@link List} of {@link String}s
+     *                 that were sent to standard output by the program being executed.
+     *                 Each {@link String} in the {@link List} is a line that was printed in standard output.
+     * @param stderr   A {@link List} of {@link String}s
+     *                 that were sent to standard error output by the program being executed.
+     *                 Each {@link String} in the {@link List} is a line
+     *                 that was printed in standard error output.
      * @throws IllegalArgumentException If any argument is not valid.
      */
     public ExecutionResponse(
-            final ExecutionRequest executionRequest,
             final ExecutionResult result,
             final int exitCode,
             final List<String> stdout,
             final List<String> stderr) throws IllegalArgumentException {
-        assertExecutionRequest(executionRequest);
         assertExecutionResult(result);
         assertStdOutList(stdout);
         assertStdErrList(stderr);
-        assertRequestAndResult(executionRequest, result);
-        this.executionRequest = executionRequest;
         this.result = result;
         this.exitCode = exitCode;
         this.stdout = stdout;
@@ -121,20 +112,6 @@ public class ExecutionResponse {
         Assert.isTrue(stderr.stream().noneMatch(Objects::isNull), "The stderr list must not contain nulls.");
     }
 
-    /**
-     * Asserts that the given {@code request} and {@code result} are consistent.
-     *
-     * @param request The {@link ExecutionRequest} to be checked.
-     * @param result  The {@link ExecutionResult} to be checked.
-     * @throws IllegalArgumentException If both are value are not consistent together.
-     */
-    private static void assertRequestAndResult(final ExecutionRequest request, final ExecutionResult result)
-            throws IllegalArgumentException {
-        Assert.isTrue(
-                result != ExecutionResult.COMPILE_ERROR || request.getLanguage().isCompiled(),
-                "If the result is a compile error, the request's language must be compiled!"
-        );
-    }
 
     // ================================
     // Type
