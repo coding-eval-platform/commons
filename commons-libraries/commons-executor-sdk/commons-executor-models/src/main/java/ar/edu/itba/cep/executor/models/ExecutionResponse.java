@@ -100,21 +100,6 @@ public class ExecutionResponse {
     }
 
     /**
-     * Asserts that the given {@code request} and {@code result} are consistent.
-     *
-     * @param request The {@link ExecutionRequest} to be checked.
-     * @param result  The {@link ExecutionResult} to be checked.
-     * @throws IllegalArgumentException If both are value are not consistent together.
-     */
-    private static void assertRequestAndResult(final ExecutionRequest request, final ExecutionResult result)
-            throws IllegalArgumentException {
-        Assert.isTrue(
-                result != ExecutionResult.COMPILE_ERROR || request.getLanguage().isCompiled(),
-                "If the result is a compile error, the request's language must be compiled!"
-        );
-    }
-
-    /**
      * Asserts that the given {@code stdout} {@link List} is valid.
      *
      * @param stdout The {@link List} with standard output to be validated.
@@ -136,6 +121,20 @@ public class ExecutionResponse {
         Assert.isTrue(stderr.stream().noneMatch(Objects::isNull), "The stderr list must not contain nulls.");
     }
 
+    /**
+     * Asserts that the given {@code request} and {@code result} are consistent.
+     *
+     * @param request The {@link ExecutionRequest} to be checked.
+     * @param result  The {@link ExecutionResult} to be checked.
+     * @throws IllegalArgumentException If both are value are not consistent together.
+     */
+    private static void assertRequestAndResult(final ExecutionRequest request, final ExecutionResult result)
+            throws IllegalArgumentException {
+        Assert.isTrue(
+                result != ExecutionResult.COMPILE_ERROR || request.getLanguage().isCompiled(),
+                "If the result is a compile error, the request's language must be compiled!"
+        );
+    }
 
     // ================================
     // Type

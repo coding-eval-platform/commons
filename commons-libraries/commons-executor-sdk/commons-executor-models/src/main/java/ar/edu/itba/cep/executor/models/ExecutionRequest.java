@@ -30,6 +30,10 @@ public class ExecutionRequest {
      */
     private final List<String> stdin;
     /**
+     * The compiler flags. Must be null if the {@link #language} is compiled.
+     */
+    private final String compilerFlags;
+    /**
      * The time given to execute, in milliseconds.
      */
     private final Long timeout;
@@ -45,6 +49,7 @@ public class ExecutionRequest {
      * @param code             The code to be run.
      * @param programArguments The input arguments to be passed to the execution.
      * @param stdin            The elements to be passed to the standard input.
+     * @param compilerFlags    The compiler flags. Should null if the {@code language} is compiled.
      * @param timeout          The time given to execute, in milliseconds.
      * @param language         The programming language in which the {@code code} is written.
      * @throws IllegalArgumentException If any argument is not valid.
@@ -53,6 +58,7 @@ public class ExecutionRequest {
             final String code,
             final List<String> programArguments,
             final List<String> stdin,
+            final String compilerFlags,
             final Long timeout,
             final Language language)
             throws IllegalArgumentException {
@@ -64,6 +70,7 @@ public class ExecutionRequest {
         this.code = code;
         this.programArguments = Collections.unmodifiableList(programArguments);
         this.stdin = Collections.unmodifiableList(stdin);
+        this.compilerFlags = compilerFlags;
         this.timeout = timeout;
         this.language = language;
     }

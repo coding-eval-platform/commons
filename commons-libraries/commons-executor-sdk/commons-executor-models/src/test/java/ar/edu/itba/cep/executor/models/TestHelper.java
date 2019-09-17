@@ -36,6 +36,14 @@ class TestHelper {
     }
 
     /**
+     * @return A valid compiler flags {@link String}.
+     */
+    /* package */
+    static String validCompilerFlags() {
+        return Faker.instance().lorem().characters();
+    }
+
+    /**
      * @return A valid timeout.
      */
     /* package */

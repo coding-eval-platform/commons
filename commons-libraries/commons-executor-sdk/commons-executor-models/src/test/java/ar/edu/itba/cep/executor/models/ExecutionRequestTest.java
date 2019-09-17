@@ -20,15 +20,47 @@ class ExecutionRequestTest {
      */
     @Test
     void testConstructorWithValidArguments() {
-        Assertions.assertDoesNotThrow(
-                () -> new ExecutionRequest(
-                        TestHelper.validCode(),
-                        TestHelper.validInputOutputList(),
-                        TestHelper.validInputOutputList(),
-                        TestHelper.validTimeout(),
-                        TestHelper.validLanguage()
+        final var code = TestHelper.validCode();
+        final var programArguments = TestHelper.validInputOutputList();
+        final var stdin = TestHelper.validInputOutputList();
+        final var compilerFlags = TestHelper.validCompilerFlags();
+        final var timeout = TestHelper.validTimeout();
+        final var language = TestHelper.validLanguage();
+
+        final var request = new ExecutionRequest(code, programArguments, stdin, compilerFlags, timeout, language);
+
+        Assertions.assertAll(
+                "Creating an execution request is not working as expected",
+                () -> Assertions.assertEquals(
+                        code,
+                        request.getCode(),
+                        "There is a mismatch in the code"
                 ),
-                "An execution request is not being created with acceptable arguments."
+                () -> Assertions.assertEquals(
+                        programArguments,
+                        request.getProgramArguments(),
+                        "There is a mismatch in the program arguments"
+                ),
+                () -> Assertions.assertEquals(
+                        stdin,
+                        request.getStdin(),
+                        "There is a mismatch in the stdin list"
+                ),
+                () -> Assertions.assertEquals(
+                        compilerFlags,
+                        request.getCompilerFlags(),
+                        "There is a mismatch in the compiler flags"
+                ),
+                () -> Assertions.assertEquals(
+                        timeout,
+                        request.getTimeout(),
+                        "There is a mismatch in the timeout"
+                ),
+                () -> Assertions.assertEquals(
+                        language,
+                        request.getLanguage(),
+                        "There is a mismatch in the language"
+                )
         );
     }
 
@@ -48,6 +80,7 @@ class ExecutionRequestTest {
                         null,
                         TestHelper.validInputOutputList(),
                         TestHelper.validInputOutputList(),
+                        TestHelper.validCompilerFlags(),
                         TestHelper.validTimeout(),
                         TestHelper.validLanguage()
                 ),
@@ -66,6 +99,7 @@ class ExecutionRequestTest {
                         TestHelper.validCode(),
                         null,
                         TestHelper.validInputOutputList(),
+                        TestHelper.validCompilerFlags(),
                         TestHelper.validTimeout(),
                         TestHelper.validLanguage()
                 ),
@@ -84,6 +118,7 @@ class ExecutionRequestTest {
                         TestHelper.validCode(),
                         TestHelper.inputOutputListWithNullElement(),
                         TestHelper.validInputOutputList(),
+                        TestHelper.validCompilerFlags(),
                         TestHelper.validTimeout(),
                         TestHelper.validLanguage()
                 ),
@@ -102,6 +137,7 @@ class ExecutionRequestTest {
                         TestHelper.validCode(),
                         TestHelper.validInputOutputList(),
                         null,
+                        TestHelper.validCompilerFlags(),
                         TestHelper.validTimeout(),
                         TestHelper.validLanguage()
                 ),
@@ -120,6 +156,7 @@ class ExecutionRequestTest {
                         TestHelper.validCode(),
                         TestHelper.validInputOutputList(),
                         TestHelper.inputOutputListWithNullElement(),
+                        TestHelper.validCompilerFlags(),
                         TestHelper.validTimeout(),
                         TestHelper.validLanguage()
                 ),
@@ -139,6 +176,7 @@ class ExecutionRequestTest {
                         TestHelper.validCode(),
                         TestHelper.validInputOutputList(),
                         TestHelper.validInputOutputList(),
+                        TestHelper.validCompilerFlags(),
                         TestHelper.nonPositiveTimeout(),
                         TestHelper.validLanguage()
                 ),
@@ -158,6 +196,7 @@ class ExecutionRequestTest {
                         TestHelper.validCode(),
                         TestHelper.validInputOutputList(),
                         TestHelper.validInputOutputList(),
+                        TestHelper.validCompilerFlags(),
                         TestHelper.validTimeout(),
                         null
                 ),
