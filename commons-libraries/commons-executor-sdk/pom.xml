@@ -20,5 +20,6 @@
 
     <modules>
         <module>commons-executor-models</module>
+        <module>commons-executor-dtos</module>
     </modules>
 </project>
