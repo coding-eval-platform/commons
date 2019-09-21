@@ -20,6 +20,7 @@
     </properties>
 
     <modules>
+        <module>commons-executor-sdk</module>
         <module>commons-keys</module>
         <module>commons-roles</module>
         <module>commons-web-authentication</module>
