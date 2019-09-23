@@ -20,6 +20,7 @@
 
     <modules>
         <module>commons-executor-api</module>
+        <module>commons-executor-client</module>
         <module>commons-executor-models</module>
         <module>commons-executor-shared</module>
     </modules>
