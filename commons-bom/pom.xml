@@ -22,7 +22,7 @@
         <dependencies>
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>
-                <artifactId>commons-executor-dtos</artifactId>
+                <artifactId>commons-executor-api</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>

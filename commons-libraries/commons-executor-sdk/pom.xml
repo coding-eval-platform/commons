@@ -19,8 +19,8 @@
     </properties>
 
     <modules>
-        <module>commons-executor-models</module>
-        <module>commons-executor-dtos</module>
         <module>commons-executor-api</module>
+        <module>commons-executor-models</module>
+        <module>commons-executor-shared</module>
     </modules>
 </project>
