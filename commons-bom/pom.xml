@@ -42,6 +42,11 @@
             </dependency>
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>
+                <artifactId>commons-kafka-messenger</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
                 <artifactId>commons-keys</artifactId>
                 <version>${revision}</version>
             </dependency>
