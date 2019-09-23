@@ -15,8 +15,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <revision>0.0.4-RELEASE</revision>
+        <revision>0.0.5-SNAPSHOT</revision>
         <com.bellotapps.webapps.webapps-commons.version>0.3.0-RELEASE</com.bellotapps.webapps.webapps-commons.version>
+        <com.bellotapps.the-messenger.version>0.0.1-RELEASE</com.bellotapps.the-messenger.version>
     </properties>
 
     <modules>
@@ -26,8 +27,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Import this libraries BOM -->
-            <!-- TODO: check if this is necessary -->
             <dependency>
                 <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-bom</artifactId>
@@ -35,12 +34,17 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <!-- Import this libraries dependencies -->
             <dependency>
                 <groupId>com.bellotapps.webapps</groupId>
                 <artifactId>webapps-commons-dependencies</artifactId>
                 <version>${com.bellotapps.webapps.webapps-commons.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.bellotapps.the-messenger</groupId>
+                <artifactId>bill-of-materials</artifactId>
+                <version>${com.bellotapps.the-messenger.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

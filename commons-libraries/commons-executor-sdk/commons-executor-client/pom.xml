@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>ar.edu.itba.cep</groupId>
+        <artifactId>commons-executor-sdk</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <artifactId>commons-executor-client</artifactId>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>ar.edu.itba.cep</groupId>
+            <artifactId>commons-executor-shared</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>ar.edu.itba.cep</groupId>
+            <artifactId>commons-executor-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- The Messenger modules -->
+        <dependency>
+            <groupId>com.bellotapps.the-messenger</groupId>
+            <artifactId>commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bellotapps.the-messenger</groupId>
+            <artifactId>consumer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bellotapps.the-messenger</groupId>
+            <artifactId>producer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bellotapps.the-messenger</groupId>
+            <artifactId>json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.bellotapps.the-messenger</groupId>
+            <artifactId>transport-json-jackson</artifactId>
+        </dependency>
+
+
+        <!-- Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <!-- Spring Boot Configuration properties processor -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -6,22 +6,23 @@
 
     <parent>
         <groupId>ar.edu.itba.cep</groupId>
-        <artifactId>commons-libraries</artifactId>
+        <artifactId>commons-executor-sdk</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>commons-executor-sdk</artifactId>
+    <artifactId>commons-executor-api</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <modules>
-        <module>commons-executor-api</module>
-        <module>commons-executor-client</module>
-        <module>commons-executor-models</module>
-        <module>commons-executor-shared</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>ar.edu.itba.cep</groupId>
+            <artifactId>commons-executor-models</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 </project>
