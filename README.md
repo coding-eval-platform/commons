@@ -10,7 +10,7 @@ Project containing several commons libraries to be reused across the platform.
 
 #### Bintray repository
 
-#### Configure the repository
+##### Configure the repository
 
 Add the following to your project's `pom.xml` file:
 
@@ -37,7 +37,7 @@ Add the following to your project's `pom.xml` file:
 </pluginRepositories>
 ```
 
-#### Use the libraries
+##### Use the libraries
 
 Add the necessary dependency in your project's `pom.xml` file. For example:
 
@@ -61,12 +61,6 @@ $ git clone https://github.com/coding-eval-platform/commons.git
 $ cd commons
 $ mvn clean install -P local-deploy
 ```
-
-
-
-The following instructions will set the development environment in your local machine.
-
-**Note: This guide covers only Mac OS X setups.**
 
 
 ## Development
