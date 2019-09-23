@@ -27,7 +27,17 @@
             </dependency>
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>
+                <artifactId>commons-executor-client</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
                 <artifactId>commons-executor-models</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>commons-executor-shared</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>
