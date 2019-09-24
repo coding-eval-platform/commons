@@ -15,7 +15,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <revision>0.0.5-SNAPSHOT</revision>
+        <revision>0.0.5-RELEASE</revision>
     </properties>
 
     <modules>
