@@ -23,6 +23,7 @@
     <modules>
         <module>commons-executor-sdk</module>
         <module>commons-keys</module>
+        <module>commons-lti-sdk</module>
         <module>commons-kafka-messenger</module>
         <module>commons-roles</module>
         <module>commons-web-authentication</module>
