@@ -11,4 +11,6 @@ public class Paths {
     public static final String LOGIN_INITIATION_PATH = "login-init";
     public static final String EXAM_SELECTION_PATH = "exam-selection";
     public static final String EXAM_SELECTED_PATH = "exam-selected";
+    public static final String EXAM_TAKING_PATH = "exam-taking";
+    public static final String EXAM_SCORING_PATH = "exam-scoring";
 }

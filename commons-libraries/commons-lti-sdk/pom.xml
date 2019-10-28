@@ -20,8 +20,6 @@
 
     <modules>
         <module>commons-lti-api</module>
-        <module>commons-lti-config</module>
-        <module>commons-lti-impl</module>
         <module>commons-lti-shared</module>
     </modules>
 </project>

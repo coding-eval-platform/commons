@@ -52,17 +52,7 @@
             </dependency>
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>
-                <artifactId>commons-lti-config</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
                 <artifactId>commons-lti-api</artifactId>
-                <version>${revision}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>commons-lti-impl</artifactId>
                 <version>${revision}</version>
             </dependency>
             <dependency>

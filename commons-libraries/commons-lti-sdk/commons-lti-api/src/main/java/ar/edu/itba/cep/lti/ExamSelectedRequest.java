@@ -13,7 +13,6 @@ public class ExamSelectedRequest {
     /**
      * The id of the exam that was selected.
      */
-    @NonNull
     private final long examId;
     /**
      * The state that must be resent after an exam is selected.
