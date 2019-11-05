@@ -38,13 +38,12 @@ public class KeyHelper {
             final String encodedKey,
             final Function<byte[], S> keySpecGenerator,
             final KeyGenerator<S, K> keyGenerator) throws InvalidKeyException {
-
-        final var decodedKeyString = Base64.getDecoder().decode(encodedKey);
-        final var keySpec = keySpecGenerator.apply(decodedKeyString);
         try {
+            final var decodedKeyString = Base64.getDecoder().decode(encodedKey);
+            final var keySpec = keySpecGenerator.apply(decodedKeyString);
             return keyGenerator.generateKey(keyFactory, keySpec);
-        } catch (final InvalidKeySpecException invalidKeySpecException) {
-            throw new InvalidKeyException(invalidKeySpecException);
+        } catch (final IllegalArgumentException | InvalidKeySpecException e) {
+            throw new InvalidKeyException(e);
         }
     }
 
@@ -82,7 +81,7 @@ public class KeyHelper {
          *
          * @param cause The {@link InvalidKeySpecException} that causes this exception to be thrown.
          */
-        private InvalidKeyException(final InvalidKeySpecException cause) {
+        private InvalidKeyException(final Throwable cause) {
             super("Invalid key", cause);
         }
     }
