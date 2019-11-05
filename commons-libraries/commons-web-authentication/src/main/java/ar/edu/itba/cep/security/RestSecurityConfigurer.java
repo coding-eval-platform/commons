@@ -100,7 +100,7 @@ class RestSecurityConfigurer extends WebSecurityConfigurerAdapter {
      * @return The {@link FilterRegistrationBean}.
      */
     @Bean
-    public FilterRegistrationBean<BearerTokenAuthenticationFilter> bearerTokenAuthenticationFilter2Registration() {
+    public FilterRegistrationBean<BearerTokenAuthenticationFilter> bearerTokenAuthenticationFilterRegistration() {
         return disabledFilterRegistration(bearerTokenAuthenticationFilter);
     }
 
