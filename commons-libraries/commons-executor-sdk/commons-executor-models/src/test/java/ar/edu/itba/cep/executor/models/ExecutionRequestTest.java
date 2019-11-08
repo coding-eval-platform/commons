@@ -25,9 +25,12 @@ class ExecutionRequestTest {
         final var stdin = TestHelper.validInputOutputList();
         final var compilerFlags = TestHelper.validCompilerFlags();
         final var timeout = TestHelper.validTimeout();
+        final var mainFileName = TestHelper.validMainFileName();
         final var language = TestHelper.validLanguage();
 
-        final var request = new ExecutionRequest(code, programArguments, stdin, compilerFlags, timeout, language);
+        final var request = new ExecutionRequest(
+                code, programArguments, stdin, compilerFlags, timeout, mainFileName, language
+        );
 
         Assertions.assertAll(
                 "Creating an execution request is not working as expected",
@@ -57,6 +60,11 @@ class ExecutionRequestTest {
                         "There is a mismatch in the timeout"
                 ),
                 () -> Assertions.assertEquals(
+                        mainFileName,
+                        request.getMainFileName(),
+                        "There is a mismatch in the main file name"
+                ),
+                () -> Assertions.assertEquals(
                         language,
                         request.getLanguage(),
                         "There is a mismatch in the language"
@@ -82,6 +90,7 @@ class ExecutionRequestTest {
                         TestHelper.validInputOutputList(),
                         TestHelper.validCompilerFlags(),
                         TestHelper.validTimeout(),
+                        TestHelper.validMainFileName(),
                         TestHelper.validLanguage()
                 ),
                 "Creating an execution request with a null code is being allowed."
@@ -101,6 +110,7 @@ class ExecutionRequestTest {
                         TestHelper.validInputOutputList(),
                         TestHelper.validCompilerFlags(),
                         TestHelper.validTimeout(),
+                        TestHelper.validMainFileName(),
                         TestHelper.validLanguage()
                 ),
                 "Creating an execution request with a null element in the inputs list is being allowed."
@@ -120,6 +130,7 @@ class ExecutionRequestTest {
                         TestHelper.inputOutputListWithNullElement(),
                         TestHelper.validCompilerFlags(),
                         TestHelper.validTimeout(),
+                        TestHelper.validMainFileName(),
                         TestHelper.validLanguage()
                 ),
                 "Creating an execution request with a null element in the inputs list is being allowed."
@@ -140,6 +151,7 @@ class ExecutionRequestTest {
                         TestHelper.validInputOutputList(),
                         TestHelper.validCompilerFlags(),
                         TestHelper.nonPositiveTimeout(),
+                        TestHelper.validMainFileName(),
                         TestHelper.validLanguage()
                 ),
                 "Creating an execution request with a null language is being allowed."
@@ -160,6 +172,7 @@ class ExecutionRequestTest {
                         TestHelper.validInputOutputList(),
                         TestHelper.validCompilerFlags(),
                         TestHelper.validTimeout(),
+                        TestHelper.validMainFileName(),
                         null
                 ),
                 "Creating an execution request with a null language is being allowed."

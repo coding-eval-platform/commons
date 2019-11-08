@@ -37,6 +37,10 @@ public class ExecutionRequest {
      */
     private final Long timeout;
     /**
+     * The name of the file in which the "main" will be placed (i.e the name of the file where the code will be copied).
+     */
+    private final String mainFileName;
+    /**
      * The programming language in which the {@link #code} is written.
      */
     private final Language language;
@@ -50,6 +54,8 @@ public class ExecutionRequest {
      * @param stdin            The elements to be passed to the standard input.
      * @param compilerFlags    The compiler flags. Should null if the {@code language} is compiled.
      * @param timeout          The time given to execute, in milliseconds.
+     * @param mainFileName     The name of the file in which the "main" will be placed
+     *                         (i.e the name of the file where the code will be copied).
      * @param language         The programming language in which the {@code code} is written.
      * @throws IllegalArgumentException If any argument is not valid.
      */
@@ -59,6 +65,7 @@ public class ExecutionRequest {
             final List<String> stdin,
             final String compilerFlags,
             final Long timeout,
+            final String mainFileName,
             final Language language)
             throws IllegalArgumentException {
         assertCode(code);
@@ -75,6 +82,7 @@ public class ExecutionRequest {
                 .orElseGet(LinkedList::new);
         this.compilerFlags = compilerFlags;
         this.timeout = timeout;
+        this.mainFileName = mainFileName;
         this.language = language;
     }
 

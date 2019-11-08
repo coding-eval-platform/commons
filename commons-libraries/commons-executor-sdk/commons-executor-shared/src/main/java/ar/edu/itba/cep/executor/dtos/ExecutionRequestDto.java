@@ -45,6 +45,10 @@ public class ExecutionRequestDto {
      */
     private static final String TIMEOUT_FIELD = "timeout";
     /**
+     * The main file name field (stored here to avoid mistakes of field naming).
+     */
+    private static final String MAIN_FILE_NAME_FIELD = "mainFileName";
+    /**
      * The language field (stored here to avoid mistakes of field naming).
      */
     private static final String LANGUAGE_FIELD = "language";
@@ -98,6 +102,15 @@ public class ExecutionRequestDto {
     }
 
     /**
+     * @return The name of the file in which the "main" will be placed
+     * (i.e the name of the file where the code will be copied).
+     */
+    @JsonProperty(value = MAIN_FILE_NAME_FIELD, access = READ_ONLY)
+    public String getMainFileName() {
+        return executionRequest.getMainFileName();
+    }
+
+    /**
      * @return The programming language in which the {@link #getCode()} is written.
      */
     @JsonProperty(value = LANGUAGE_FIELD, access = READ_ONLY)
@@ -115,6 +128,8 @@ public class ExecutionRequestDto {
      * @param stdin            The standard input to be passed to the execution.
      * @param compilerFlags    The compiler flags. Should be null if the {@code language} is compiled.
      * @param timeout          The time given to execute, in milliseconds.
+     * @param mainFileName     The name of the file in which the "main" will be placed
+     *                         (i.e the name of the file where the code will be copied).
      * @param language         The programming language in which the {@code code} is written.
      * @return The created {@link ExecutionRequestDto}.
      * @throws IllegalArgumentException If any argument is not valid.
@@ -126,7 +141,10 @@ public class ExecutionRequestDto {
             @JsonProperty(value = STDIN_FIELD, access = WRITE_ONLY) final List<String> stdin,
             @JsonProperty(value = COMPILER_FLAGS_FIELD, access = WRITE_ONLY) final String compilerFlags,
             @JsonProperty(value = TIMEOUT_FIELD, access = WRITE_ONLY) final Long timeout,
+            @JsonProperty(value = MAIN_FILE_NAME_FIELD, access = WRITE_ONLY) final String mainFileName,
             @JsonProperty(value = LANGUAGE_FIELD, access = WRITE_ONLY) final Language language) {
-        return buildFromRequest(new ExecutionRequest(code, programArguments, stdin, compilerFlags, timeout, language));
+        return buildFromRequest(
+                new ExecutionRequest(code, programArguments, stdin, compilerFlags, timeout, mainFileName, language)
+        );
     }
 }
